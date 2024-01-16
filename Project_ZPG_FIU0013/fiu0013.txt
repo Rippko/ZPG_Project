@@ -1,0 +1,97 @@
+Základy počítačové grafiky 2023/2024
+
+Jméno a příjmení: Adam Fiury
+Login: FIU0013
+
+V několika větách popište kde máte ve zdrojovém kódu danou věc (třída, řádek), jak funguje a jaké má výhody/nevýhody. Splněno nechte, jen pokud je vše splněno a funkční, jinak nesplněno. 
+
+
+1. Třída ShaderProgram
+----------------------
+  a) splněno
+     Popis: V mém projektu je třída reprezentována třídou Shader bez rozdělení na Shader a ShaderProgram, nicméně i přesto zpracovává všechny funkcionality a zachovává proměnnou id_shaderu jako privátní
+
+  b) splněno
+     Popis: Nastavení shaderu je možné pomocí metody useShaderProgram, která se nachází ve třídě Shader.
+
+  c) splněno
+     Popis: Přetížení metody pro posílání uniformních proměnných najdeme ve třídě Shader s názvem LinkDataToShader.
+
+  d) splněno
+     Popis: Má třída Shader je schopna za pomoci metody loadShader načítat jak vertex, tak fragment shader jako textový soubor.
+
+
+2. Třída DrawableModel
+----------------------
+  a) splněno
+     Popis: Vytvořil jsem třídu DrawableModel, která odpovídá zadání a je zodpovědná za vykreslení a zpracování konkrétního modelu dle zadání.
+
+
+3. Transformace
+----------------------
+  a) splněno
+     Popis: Díky využívání návrhového vzoru Composite je možné skládat transformace a následně je aplikovat na model. Tato funkcionalita se nachází ve třídě TransformationComposite.
+
+  b) splněno
+     Popis: Na základě mých testů toto skládání a pohyb po úsečce funguje správně.
+
+  c) splněno
+     Popis: Podle testů jsem schopen rotovat tělesem mimo střed souředné soustavy.
+
+  d) splněno
+     Popis: Pro ukládání transformací jsem využil návrhový vzor Composite.
+
+
+4. Třída Camera
+----------------------
+  a) splněno
+     Popis: Pohybování kamery zajišťuje metoda moveCamera, která se nachází ve třídě Camera.
+
+  b) splněno
+     Popis: Za pomocí metody controlCameraWithMouse jsem implementoval ovládání kamery pomocí myši. Najdeme ve třídě Camera. Pro funkčnost mé metody jsem využil propojení se statickou metodou cursor_callback, která se nachází v Application.cpp na řádku 22.
+
+  c) splněno
+     Popis: Jelikož třída Camera dědí z abstraktní třídy Observer a implementuje její virtuální metody tak i tento bod považuji za splněný. Výhdou je, že pokud dojde k jakékoliv směně tato změna se automaticky projeví na kameře.
+
+
+5. Třída Light
+----------------------
+  a) splněno
+     Popis: Třída Light je reprezentována třídou Light, která je schopna vytvořit světlo a nastavit jeho parametry jinak jsou v konstruktoru nastaveny defaultní paramatry světla. Zároveň dědí z abstraktní třídy Observer a implementuje její virtuální metody.
+
+  b) splněno
+     Popis: Za pomocí metody updateLight dojde k aktualizaci vlstností pro shader. Tato metoda se nachází ve třídě Light.
+
+6. Třída Material
+----------------------
+  a) nesplněno 
+     Popis: Bohužel jsem nestihl implementovat třídu Material.
+
+
+
+Testovací scény  
+
+1) Základní test Phongova osvětlovacího modelu.
+----------------------
+  splněno
+  Popis: Pro vykreslení této testovací scény slouží metoda třídy Scene::Phong, která v sobě obshauje logiku pro vykreslení této scény. Tato metoda se nachází v souboru Scene.cpp.
+
+2) Test na rotaci a jeji skládání. 
+----------------------
+  nesplněno
+  Popis: Pro vykreslení této testovací scény slouží metoda třídy Scene::SolarSystem, která v sobě obshauje logiku pro vykreslení této scény. Tato metoda se nachází v souboru Scene.cpp. Ačkoliv skládání jednotlivých transformací funguje, tak se mi nepodařilo implementovat rotaci v solárním systemu Měsíce a Zěmě.
+
+3) Test na ořezání světla, které nemůže dopadnou na plochu.
+----------------------
+  splněno
+  Popis: Pro vykreslení této scény slouží metoda třídy Scene::Scene3, která v sobě obshauje logiku pro vykreslení této scény. Tato metoda se nachází v souboru Scene.cpp. A v případě upravení shaderu lze na přiložených screenshotech vidět jak se mění výsledek.
+
+4) Test na změnu velikosti obrazovky. 
+----------------------
+  splněno
+  Popis: Pro reakci na změnu velikosti obrazovky jsem využil callback metodu window_size_callback a zde následně předal velikost okna do Camery pomocí metody getWidthHeight. Tato metoda se nachází v souboru Application.cpp na řádku 20.
+         Jako testovací scénu jsem použil 1. scénu Phongova osvětlovacího modelu a nedochází k deformacím.
+5) Testování na více objektů a použití více shaderu ve scéně (procházení lesa). 
+----------------------
+  splněno
+  Popis: Pro vykreslení této scény jsem využil metodu třídy Scene::Forest, která v sobě obshauje logiku pro vykreslení této scény. Tato metoda se nachází v souboru Scene.cpp.
